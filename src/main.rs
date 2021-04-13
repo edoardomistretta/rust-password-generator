@@ -1,15 +1,24 @@
 use rand::Rng;
-use std::char;
-use std::io;
+use std::{char, env};
 
 fn main() {
-    let password_length = get_password_length();
-    let random_chars = get_random_chars(password_length);
+    let args: Vec<String> = env::args().collect();
 
-    println!("{}", random_chars)
+    match args.len() {
+        2 => {
+            let password_length: i32 = args[1].parse().unwrap();
+            let random_chars = get_random_chars(password_length);
+            println!("{}", random_chars)
+        }
+        _ => {
+            let password_length = 24;
+            let random_chars = get_random_chars(password_length);
+            println!("{}", random_chars)
+        }
+    }
 }
 
-fn get_random_chars(chars_number: usize) -> String {
+fn get_random_chars(chars_number: i32) -> String {
     let mut random_chars = String::new();
     let mut index = 0;
     while index < chars_number {
@@ -19,13 +28,3 @@ fn get_random_chars(chars_number: usize) -> String {
     random_chars
 }
 
-fn get_password_length() -> usize {
-    println!("How long should the password be?");
-
-    let mut password_length = String::new();
-    io::stdin()
-        .read_line(&mut password_length)
-        .expect("Failed to read line");
-
-    password_length.trim().parse().unwrap()
-}

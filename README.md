@@ -12,11 +12,10 @@ cargo run
 You can install and run on your machine `password-generator` with
 ```bash
 cargo install --path .
-password-generator
+password-generator [PWD_LENGTH]
 ```
 ### Change password length
-Default password length is 24. You can edit this configuration with `--length NUMBER` argument
+Default password length is 24. You can edit this configuration with optional `PWD_LENGTH` argument
 ```bash
-cargo install --path .
-password-generator --length 12
+password-generator 12
 ```
